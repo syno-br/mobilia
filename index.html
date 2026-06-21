@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mobil.IA | Mostre antes de vender</title>
+<meta name="description" content="Mobil.IA transforma a foto do ambiente do cliente em uma simulação realista usando o catálogo real da sua loja de móveis.">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="https://d8j0ntlcm91z4.cloudfront.net/user_3ABnaz0TeLmqfEY2AkB4r4dev3h/hf_20260611_194725_9920c436-6aa1-4f21-9c65-cfa7c470edd1.png">
+<link rel="preload" as="image" href="https://d8j0ntlcm91z4.cloudfront.net/user_3ABnaz0TeLmqfEY2AkB4r4dev3h/hf_20260611_194657_8d243167-b030-4d99-8aad-8e2220435b21.png">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#" class="nav-logo" aria-label="Mobil.IA, página inicial">
+      <img class="logo-dark-v" src="assets/logo-white.png" alt="Mobil.IA">
+      <img class="logo-light-v" src="assets/logo-color.png" alt="Mobil.IA">
+    </a>
+    <nav class="nav-links" aria-label="Navegação principal">
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#modos">Modos</a>
+      <a href="#catalogo">Catálogo</a>
+      <a href="#para-lojas">Para lojas</a>
+    </nav>
+    <a class="nav-cta" href="#piloto">CONTATO</a>
+    <button class="nav-burger" id="burger" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="#como-funciona">Como funciona</a>
+    <a href="#modos">Modos</a>
+    <a href="#catalogo">Catálogo</a>
+    <a href="#para-lojas">Para lojas</a>
+    <a href="#piloto" style="color:#5FA4E3">Entrar na lista de pilotos →</a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" data-theme="dark">
+  <div class="hero-bg" id="heroBg" aria-hidden="true">
+    <img class="hero-photo" id="heroPhoto" src="https://d8j0ntlcm91z4.cloudfront.net/user_3ABnaz0TeLmqfEY2AkB4r4dev3h/hf_20260611_194725_9920c436-6aa1-4f21-9c65-cfa7c470edd1.png" alt="">
+    <video class="hero-photo hero-video" id="heroVideo" muted loop playsinline preload="auto" poster="https://d8j0ntlcm91z4.cloudfront.net/user_3ABnaz0TeLmqfEY2AkB4r4dev3h/hf_20260612_015119_82415f42-b530-497e-afb4-7143a4875b81.png"></video>
+    <div class="hero-shade"></div>
+    <div class="hero-vignette"></div>
+    <canvas id="dust"></canvas>
+  </div>
+
+  <div class="wrap hero-grid">
+    <span class="hero-eyebrow rv-hero"><span class="dot"></span>IA visual para lojas de móveis e decoração</span>
+    <img class="hero-mark rv-hero" src="assets/icon-white.png" alt="">
+    <h1 id="heroTitle"><span class="hw">Mostre</span> <span class="hw">antes</span> <span class="hw">de</span> <span class="hw hl">vender.</span></h1>
+    <p class="hero-sub rv-hero">A foto do ambiente do cliente. Os produtos reais do seu catálogo. Em segundos, o Mobil.IA gera uma <strong>simulação hiper-realista</strong> que transforma o "vou pensar" em decisão de compra.</p>
+    <div class="hero-ctas rv-hero">
+      <a class="btn btn-primary" href="#piloto">Entrar em contato
+        <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+
+    <!-- demo stage: real photo + flying product card + AI scan + crossfade -->
+    <div class="stage" id="stage" aria-label="Demonstração: produto inserido na foto do cliente">
+      <div class="stage-tilt" id="stageTilt">
+        <div class="room-card" id="roomCard">
+          <img class="ph" id="imgEmpty" src="https://d8j0ntlcm91z4.cloudfront.net/user_3ABnaz0TeLmqfEY2AkB4r4dev3h/hf_20260612_195932_43f01153-fdce-4598-afb0-0036b1a4852c.png" alt="Foto da sala vazia enviada pela cliente">
+          <img class="ph" id="imgAfter" src="https://d8j0ntlcm91z4.cloudfront.net/user_3ABnaz0TeLmqfEY2AkB4r4dev3h/hf_20260612_194330_af293fcb-954b-45e7-a54b-dcc5a29c1b47.png" alt="Simulação: produto do catálogo inserido pela IA">
+          <span class="chip chip-photo" id="heroChip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="14" rx="2.5"/><circle cx="12" cy="13" r="3.6"/><path d="M9 6l1.2-2h3.6L15 6"/></svg>
+            sala-cliente-ana.jpg
+          </span>
+          <div class="scan" id="heroScan">
+            <div class="scan-grid"></div>
+            <div class="scan-line" id="heroScanLine"></div>
+            <span class="scan-label">mobil.ia · analisando perspectiva, escala e luz…</span>
+          </div>
+          <span class="chip chip-done" id="heroDone">
+            <span class="ck"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5 5 9l5-6" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            Simulação gerada em 4,2 s
+          </span>
+        </div>
+
+        <aside class="catalog-card" id="catalogCard" aria-label="Catálogo da loja">
+          <div class="cc-head">
+            <span class="cc-title">Catálogo · Bossa Móveis</span>
+            <span class="cc-badge">real</span>
+          </div>
+          <button class="cc-item active" id="ccActive" data-sim="https://d8j0ntlcm91z4.cloudfront.net/user_3ABnaz0TeLmqfEY2AkB4r4dev3h/hf_20260612_194330_af293fcb-954b-45e7-a54b-dcc5a29c1b47.png">
+            <span class="cc-thumb"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3ABnaz0TeLmqfEY2AkB4r4dev3h/hf_20260611_194717_3c42fccb-51fa-4d9f-991f-4deb69149e24.png" alt=""></span>
+            <span class="cc-info"><span class="cc-name">Sofá Class 3 lugares</span><span class="cc-price">R$ 2.490</span></span>
+            <span class="cc-sel"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5 5 9l5-6" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <button class="cc-item" data-sim="https://d8j0ntlcm91z4.cloudfront.net/user_3ABnaz0TeLmqfEY2AkB4r4dev3h/hf_20260612_194339_9122c3a8-083e-4486-be28-3d333e755e24.png">
+            <span class="cc-thumb"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3ABnaz0TeLmqfEY2AkB4r4dev3h/hf_20260612_011716_9cdd2500-0ee3-40f5-a82d-0877bfa85eac.png" alt=""></span>
+            <span class="cc-info"><span class="cc-name">Poltrona Lina</span><span class="cc-price">R$ 1.190</span></span>
+            <span class="cc-sel"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5 5 9l5-6" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <button class="cc-item" data-sim="https://d8j0ntlcm91z4.cloudfront.net/user_3ABnaz0TeLmqfEY2AkB4r4dev3h/hf_20260612_194359_9c2b000b-6794-467d-87d4-e85729b3a64c.png">
+            <span class="cc-thumb"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3ABnaz0TeLmqfEY2AkB4r4dev3h/hf_20260612_011730_36ea179a-a5d0-47a7-9ee9-3718a8c9fde4.png" alt=""></span>
+            <span class="cc-info"><span class="cc-name">Rack Bossa 1,8 m</span><span class="cc-price">R$ 1.640</span></span>
+            <span class="cc-sel"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5 5 9l5-6" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+        </aside>
+
+        <img class="fly-sofa" id="flySofa" src="https://d8j0ntlcm91z4.cloudfront.net/user_3ABnaz0TeLmqfEY2AkB4r4dev3h/hf_20260612_012720_b5195c41-2457-4940-863e-c5ccdc463eeb.png" alt="" aria-hidden="true">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" data-theme="dark" aria-hidden="true">
+  <div class="marquee-track" id="marqueeTrack">
+    <span>Mostre antes de vender</span>
+    <span>Da foto do cliente à simulação realista</span>
+    <span>Use o catálogo real da loja</span>
+    <span>Gere variações em segundos</span>
+    <span>Envie pelo WhatsApp</span>
+    <span>Venda com mais confiança</span>
+  </div>
+</div>
+
+<!-- ============ COMO FUNCIONA (pinned scroll journey) ============ -->
+<section class="how section" id="como-funciona" data-theme="light">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-eyebrow">Como funciona</span>
+      <h2>Da foto do cliente<br>à <span class="hl-ink">simulação realista</span>.</h2>
+      <p>Role a página e veja a transformação acontecer: é exatamente isso que o vendedor faz na loja, em segundos.</p>
+    </div>
+
+    <div class="how-pin" id="howPin">
+      <div class="steps" id="steps">
+        <div class="step active" data-step="0">
+          <span class="step-num">PASSO 01</span>
+          <h3>A foto do cliente</h3>
+          <p>O cliente manda a foto do ambiente pelo WhatsApp, ou tira na hora, na loja. Nenhum app para instalar.</p>
+        </div>
+        <div class="step" data-step="1">
+          <span class="step-num">PASSO 02</span>
+          <h3>O catálogo real da loja</h3>
+          <p>O vendedor escolhe produtos reais, com preço, medida e acabamento. Nada de móveis genéricos.</p>
+        </div>
+        <div class="step" data-step="2">
+          <span class="step-num">PASSO 03</span>
+          <h3>A IA entende o espaço</h3>
+          <p>Perspectiva, escala e iluminação da foto são analisadas para o produto se encaixar como numa foto de verdade.</p>
+        </div>
+        <div class="step" data-step="3">
+          <span class="step-num">PASSO 04</span>
+          <h3>Simulação pronta para enviar</h3>
+          <p>Imagem hiper-realista gerada em segundos, pronta para o WhatsApp ou para a proposta.</p>
+        </div>
+      </div>
+
+      <div class="how-stage" id="howStage" aria-label="Demonstração visual dos passos">
+        <img class="ph" id="howEmpty" src="https://d8j0ntlcm91z4.cloudfront.net/user_3ABnaz0TeLmqfEY2AkB4r4dev3h/hf_20260611_194657_8d243167-b030-4d99-8aad-8e2220435b21.png" alt="Foto original do ambiente do cliente">
+        <img class="ph" id="howAfter" src="https://d8j0ntlcm91z4.cloudfront.net/user_3ABnaz0TeLmqfEY2AkB4r4dev3h/hf_20260612_193345_b293dc9b-16e3-4d05-bf64-6e0bb189b7b0.png" alt="Simulação gerada com o sofá do catálogo">
+        <div class="hs-frame" id="hsFrame"><i></i><i></i><i></i><i></i></div>
+        <span class="hs-chip" id="hsChip1" style="top:6%;left:5%">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="14" rx="2.5"/><circle cx="12" cy="13" r="3.6"/><path d="M9 6l1.2-2h3.6L15 6"/></svg>
+          IMG_2041.jpg · recebida via WhatsApp
+        </span>
+        <aside class="hs-cat" id="hsCat">
+          <div class="cc-head"><span class="cc-title" style="color:var(--gray)">Catálogo</span><span class="cc-badge">real</span></div>
+          <div class="cc-item active">
+            <span class="cc-thumb"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3ABnaz0TeLmqfEY2AkB4r4dev3h/hf_20260611_194717_3c42fccb-51fa-4d9f-991f-4deb69149e24.png" alt=""></span>
+            <span class="cc-info"><span class="cc-name">Sofá Class 3 lugares</span><span class="cc-price">R$ 2.490</span></span>
+            <span class="cc-sel"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5 5 9l5-6" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+          <div class="cc-item">
+            <span class="cc-thumb"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3ABnaz0TeLmqfEY2AkB4r4dev3h/hf_20260612_011723_18603a39-8953-4802-b512-87131308db7b.png" alt=""></span>
+            <span class="cc-info"><span class="cc-name">Mesa Ipê Natural</span><span class="cc-price">R$ 890</span></span>
+            <span class="cc-sel"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5 5 9l5-6" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+        </aside>
+        <div class="hs-scan" id="hsScan">
+          <div class="scan-grid"></div>
+          <div class="scan-line" id="hsScanLine" style="top:30%"></div>
+          <span class="hs-measure" style="top:46%;left:38%">2,10 m ✓</span>
+          <span class="hs-measure" style="top:24%;left:62%">luz natural ✓</span>
+          <span class="hs-measure" style="top:64%;left:18%">perspectiva ✓</span>
+        </div>
+        <div class="hs-wapp" id="hsWapp">
+          <span class="wa"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.2 14.1c-.2.6-1.2 1.1-1.7 1.2-.4 0-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c0 .2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1.1 2.2 1.4 2.5 1.5.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .7-.2 1.2Z"/></svg></span>
+          Enviado para Ana · WhatsApp
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ANTES / DEPOIS ============ -->
+<section class="ba section" data-theme="dark">
+  <div class="wrap">
+    <div class="sec-head sec-head-dark rv">
+      <span class="sec-eyebrow sec-eyebrow-dark">Antes · Depois</span>
+      <h2>De "vou pensar" para<br><span class="hl">"é esse mesmo."</span></h2>
+      <p>A mesma foto, o mesmo ângulo, a mesma luz. Arraste e veja o produto real da loja dentro do ambiente real do cliente. Funciona dos dois jeitos: preenchendo um espaço vazio ou trocando um móvel que o cliente já tem.</p>
+    </div>
+    <div class="ba-seg rv" id="baSeg" data-mode="vazio" role="tablist" aria-label="Modos da comparação">
+      <span class="ba-seg-thumb" aria-hidden="true"></span>
+      <button class="ba-seg-btn on" data-mode="vazio" role="tab" aria-selected="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>Sala em branco
+      </button>
+      <button class="ba-seg-btn" data-mode="troca" role="tab" aria-selected="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13l-3.5-3.5M20 16H7l3.5 3.5"/></svg>Renovar o ambiente
+      </button>
+    </div>
+    <p class="ba-seg-desc rv" id="baSegDesc">Preencha um ambiente vazio com produtos do catálogo.</p>
+    <div class="ba-frame rv" id="baFrame">
+      <img class="ph" id="baBefore" src="https://d8j0ntlcm91z4.cloudfront.net/user_3ABnaz0TeLmqfEY2AkB4r4dev3h/hf_20260611_194657_8d243167-b030-4d99-8aad-8e2220435b21.png" alt="Antes: foto original da sala vazia do cliente">
+      <span class="ba-label before" id="baLblBefore">Antes · Foto do cliente</span>
+      <div class="ba-after" id="baAfter">
+        <img class="ph" id="baAfterImg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3ABnaz0TeLmqfEY2AkB4r4dev3h/hf_20260612_010754_10a88c18-3d37-4320-a610-eb775ec6a5ef.png" alt="Depois: simulação Mobil.IA com o sofá e a composição inseridos">
+        <span class="ba-label after" id="baLblAfter">Depois · Simulação Mobil.IA</span>
+      </div>
+      <div class="ba-handle" id="baHandle">
+        <span class="ba-knob">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/></svg>
+        </span>
+      </div>
+      <input class="ba-range" id="baRange" type="range" min="0" max="100" value="50" aria-label="Comparar antes e depois">
+    </div>
+    <div class="ba-foot rv">
+      <p id="baCaption">// sofá class 3 lugares · azul royal · com composição de ambiente na foto original do cliente</p>
+      <a class="btn btn-ghost" href="#piloto" style="padding:12px 22px;font-size:14px">Quero isso na minha loja</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MODOS ============ -->
+<section class="modes section" id="modos" data-theme="light">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-eyebrow">Dois modos</span>
+      <h2>Uma peça. Ou o <span class="hl-ink">ambiente inteiro</span>.</h2>
+      <p>O mesmo ambiente da cliente Ana, simulado nos dois modos. Repare que a sala, a luz e o ângulo não mudam.</p>
+    </div>
+    <div class="modes-grid">
+      <article class="mode rv">
+        <div class="mode-visual">
+          <img class="ph" src="assets/antes_troca.png" alt="Antes: o sofá atual do cliente no ambiente">
+          <img class="ph mode-after" src="assets/depois_troca.png" alt="Depois: o sofá trocado por um do catálogo, no mesmo lugar">
+          <span class="mode-glass">modo 01 · adicionar ou trocar</span>
+          <span class="swap-tag swap-antes">antes</span>
+          <span class="swap-tag swap-depois">depois</span>
+        </div>
+        <div class="mode-body">
+          <span class="mode-tag">Peça em Cena</span>
+          <h3>Aquele produto, naquele lugar.</h3>
+          <div class="mode-ways">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>Adicionar peça</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13l-3.5-3.5M20 16H7l3.5 3.5"/></svg>Trocar peça existente</span>
+          </div>
+          <p>Tire a dúvida de um item específico: insira a peça num espaço vazio, ou troque um móvel que o cliente já tem, no mesmo lugar.</p>
+          <div class="mode-list">
+            <span>1 produto por vez</span><span>adicionar ou substituir</span><span>variações de cor e tecido</span>
+          </div>
+        </div>
+      </article>
+      <article class="mode rv">
+        <div class="mode-visual">
+          <img class="ph" src="https://d8j0ntlcm91z4.cloudfront.net/user_3ABnaz0TeLmqfEY2AkB4r4dev3h/hf_20260612_010807_324fc5f0-01f6-44f3-9974-708b8e9bdfd5.png" alt="Modo Monte o Ambiente: composição completa no mesmo ambiente">
+          <span class="mode-glass">modo 02 · ambiente completo</span>
+        </div>
+        <div class="mode-body">
+          <span class="mode-tag">Monte o Ambiente</span>
+          <h3>A sala inteira, vendida de uma vez.</h3>
+          <div class="mode-ways">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg>Ambiente do zero</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>Complete o que já tem</span>
+          </div>
+          <p>Sofá, poltrona, rack, mesa e decoração: uma composição completa e harmonizada que valoriza o espaço e multiplica o ticket médio da loja.</p>
+          <div class="mode-list">
+            <span>vários produtos juntos</span><span>composição harmonizada</span><span>ticket médio maior</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CATÁLOGO ============ -->
+<section class="catalog section" id="catalogo" data-theme="light">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-eyebrow">Catálogo real · demo interativa</span>
+      <h2>Use o <span class="hl-ink">catálogo real</span> da loja.</h2>
+      <p>Nada de móveis genéricos de IA. Experimente abaixo: selecione produtos de verdade e gere a simulação no ambiente da cliente Ana.</p>
+    </div>
+
+    <div class="csteps rv" aria-hidden="true">
+      <span class="cstep"><b>1</b>Busque ou filtre</span>
+      <span class="cstep"><b>2</b>Selecione os produtos</span>
+      <span class="cstep"><b>3</b>Gere a simulação</span>
+    </div>
+
+    <div class="cdemo rv" id="cdemo">
+      <div class="cdemo-top">
+        <span class="cdemo-title"><img src="assets/icon-blue.png" alt="">Catálogo · Bossa Móveis</span>
+        <span class="cdemo-badge">demo interativa · clique nos produtos</span>
+      </div>
+      <div class="cdemo-grid">
+
+        <div class="cpanel">
+          <div class="cpanel-pad">
+            <div class="csearch" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+              <span id="typed"></span><span class="caret"></span>
+            </div>
+          </div>
+          <div class="cfilters" role="tablist">
+            <button class="fchip on" data-f="all">Todos</button>
+            <button class="fchip" data-f="sofa">Sofás</button>
+            <button class="fchip" data-f="poltrona">Poltronas</button>
+            <button class="fchip" data-f="mesa">Mesas</button>
+            <button class="fchip" data-f="rack">Racks</button>
+          </div>
+          <div class="prows" id="catProducts">
+            <button class="prow sel" data-cat="sofa" data-price="2490">
+              <span class="prow-img"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3ABnaz0TeLmqfEY2AkB4r4dev3h/hf_20260611_194717_3c42fccb-51fa-4d9f-991f-4deb69149e24.png" alt="" loading="lazy"></span>
+              <span class="prow-info"><span class="prow-cat">Sofás · 3 lugares</span><span class="prow-name">Sofá Class Azul Royal</span><span class="prow-price">R$ 2.490</span></span>
+              <span class="prow-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5 5 9l5-6" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </button>
+            <button class="prow" data-cat="poltrona" data-price="1190">
+              <span class="prow-img"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3ABnaz0TeLmqfEY2AkB4r4dev3h/hf_20260612_011716_9cdd2500-0ee3-40f5-a82d-0877bfa85eac.png" alt="" loading="lazy"></span>
+              <span class="prow-info"><span class="prow-cat">Poltronas</span><span class="prow-name">Poltrona Lina Linho Cru</span><span class="prow-price">R$ 1.190</span></span>
+              <span class="prow-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5 5 9l5-6" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </button>
+            <button class="prow" data-cat="mesa" data-price="890">
+              <span class="prow-img"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3ABnaz0TeLmqfEY2AkB4r4dev3h/hf_20260612_011723_18603a39-8953-4802-b512-87131308db7b.png" alt="" loading="lazy"></span>
+              <span class="prow-info"><span class="prow-cat">Mesas · Centro</span><span class="prow-name">Mesa Ipê Natural</span><span class="prow-price">R$ 890</span></span>
+              <span class="prow-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5 5 9l5-6" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </button>
+            <button class="prow" data-cat="rack" data-price="1640">
+              <span class="prow-img"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3ABnaz0TeLmqfEY2AkB4r4dev3h/hf_20260612_011730_36ea179a-a5d0-47a7-9ee9-3718a8c9fde4.png" alt="" loading="lazy"></span>
+              <span class="prow-info"><span class="prow-cat">Racks · 1,8 m</span><span class="prow-name">Rack Bossa Freijó</span><span class="prow-price">R$ 1.640</span></span>
+              <span class="prow-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5 5 9l5-6" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </button>
+          </div>
+          <div class="cfoot">
+            <div class="cfoot-row">
+              <span class="cfoot-count"><b id="selCount">1</b> produto selecionado</span>
+              <span class="cfoot-total" id="selTotal">R$ 2.490</span>
+            </div>
+            <button class="cgo" id="catGo">Gerar simulação
+              <svg viewBox="0 0 16 16" fill="none"><path d="M8 1.5l1.7 3.9 4.3.4-3.2 2.8 1 4.2L8 10.6l-3.8 2.2 1-4.2L2 5.8l4.3-.4z" fill="currentColor"/></svg>
+            </button>
+            <span class="chint" id="catHint">A simulação aparece no ambiente ao lado</span>
+          </div>
+        </div>
+
+        <div class="cstage" id="cstage">
+          <img class="cimg" id="csEmpty" src="https://d8j0ntlcm91z4.cloudfront.net/user_3ABnaz0TeLmqfEY2AkB4r4dev3h/hf_20260612_195932_43f01153-fdce-4598-afb0-0036b1a4852c.png" alt="Ambiente da cliente Ana, sala vazia">
+          <img class="cimg" id="csResultImg" alt="Simulação gerada com os produtos selecionados">
+          <span class="chip chip-photo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="14" rx="2.5"/><circle cx="12" cy="13" r="3.6"/><path d="M9 6l1.2-2h3.6L15 6"/></svg>
+            ambiente · sala-cliente-ana.jpg
+          </span>
+          <div class="scan" id="csScan">
+            <div class="scan-grid"></div>
+            <div class="scan-line" id="csScanLine"></div>
+            <span class="scan-label">mobil.ia · analisando perspectiva, escala e luz…</span>
+          </div>
+          <div class="cresult" id="csResult">
+            <span class="cresult-txt">
+              <span class="cresult-st" id="csStatus">Aguardando sua seleção</span>
+              <span class="cresult-sub" id="csSub">selecione produtos e clique em Gerar simulação</span>
+            </span>
+            <button class="cwhats" id="csWhats">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.2 14.1c-.2.6-1.2 1.1-1.7 1.2-.4 0-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c0 .2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1.1 2.2 1.4 2.5 1.5.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .7-.2 1.2Z"/></svg>
+              Enviar no WhatsApp
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="cfeats">
+      <div class="cfeat rv">
+        <span class="cfeat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span>
+        <div><h3>Busca instantânea</h3><p>Por nome, categoria, medida ou cor, com o cliente na frente. O vendedor acha em segundos.</p></div>
+      </div>
+      <div class="cfeat rv">
+        <span class="cfeat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg></span>
+        <div><h3>Categorias e filtros</h3><p>Sofás, poltronas, mesas e racks organizados do jeito que a loja já trabalha.</p></div>
+      </div>
+      <div class="cfeat rv">
+        <span class="cfeat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18"/></svg></span>
+        <div><h3>Variações em segundos</h3><p>Outra cor, outro tecido, outra composição. Gere de novo sem refazer nada.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FLUXO DO VENDEDOR ============ -->
+<section class="flow section" data-theme="light">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-eyebrow">No ritmo da venda</span>
+      <h2>Feito para o vendedor.<br><span class="hl-ink">No tempo da loja.</span></h2>
+      <p>Sem curva de aprendizado, sem tela complicada. Quatro toques entre a dúvida do cliente e a imagem que fecha a venda.</p>
+    </div>
+
+    <div class="flow-clock rv" aria-hidden="true">
+      <span class="fc-val" id="flowClock">00:40</span>
+      <span class="fc-lab">da dúvida ao envio</span>
+    </div>
+
+    <div class="flow-rail rv">
+      <div class="flow-track" aria-hidden="true"><div class="flow-beam" id="flowBeam"></div></div>
+      <div class="flow-steps" id="flowSteps" role="tablist" aria-label="Etapas do fluxo de venda">
+        <button class="fstep on" data-i="0" role="tab">
+          <span class="fstep-node"><span class="fstep-idx">1</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="2.5"/><circle cx="12" cy="13" r="3.4"/><path d="M9 6l1.2-2h3.6L15 6"/></svg>
+          </span>
+          <span class="fstep-body">
+            <span class="fstep-k">Etapa 01</span>
+            <h3>Receba a foto</h3>
+            <p>O cliente manda a foto pelo WhatsApp da loja, ou o vendedor tira na hora com ele ao lado.</p>
+          </span>
+        </button>
+        <button class="fstep" data-i="1" role="tab">
+          <span class="fstep-node"><span class="fstep-idx">2</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          </span>
+          <span class="fstep-body">
+            <span class="fstep-k">Etapa 02</span>
+            <h3>Escolha os produtos</h3>
+            <p>Busque no catálogo real e selecione uma peça ou a composição inteira do ambiente.</p>
+          </span>
+        </button>
+        <button class="fstep" data-i="2" role="tab">
+          <span class="fstep-node"><span class="fstep-idx">3</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/><circle cx="12" cy="12" r="3.4"/></svg>
+          </span>
+          <span class="fstep-body">
+            <span class="fstep-k">Etapa 03</span>
+            <h3>Gere a simulação</h3>
+            <p>A IA encaixa os produtos respeitando perspectiva, escala e luz da foto original.</p>
+          </span>
+        </button>
+        <button class="fstep" data-i="3" role="tab">
+          <span class="fstep-node"><span class="fstep-idx">4</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 3 11 14M22 3l-7 19-4-8-8-4 19-7Z"/></svg>
+          </span>
+          <span class="fstep-body">
+            <span class="fstep-k">Etapa 04</span>
+            <h3>Envie e feche</h3>
+            <p>Direto no WhatsApp do cliente ou anexada à proposta. A imagem fecha a conversa.</p>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <div class="flow-foot rv">
+      <span class="ff-chip">tempo real de loja</span>
+      <span>Menos de um minuto entre o "será que cabe?" e a imagem que decide a compra.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHATSAPP ============ -->
+<section class="wapp section" data-theme="light">
+  <div class="wrap wapp-grid">
+    <div>
+      <div class="rv">
+        <span class="eyebrow">A proposta visual</span>
+        <h2 style="font-size:clamp(30px,3.8vw,46px);margin:18px 0 16px">A proposta que o cliente entende na hora.</h2>
+        <p style="font-size:17px;color:var(--ink-soft)">Esqueça o orçamento em PDF que ninguém abre. A simulação chega onde a conversa já está acontecendo, com o produto, o nome e o preço.</p>
+      </div>
+      <div class="wapp-points">
+        <div class="wp rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Envie pelo WhatsApp</b>: a imagem entra na conversa de venda, não numa pasta esquecida.</span></div>
+        <div class="wp rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Compartilhe por link</b>: o cliente mostra para a família e a decisão acelera.</span></div>
+        <div class="wp rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Anexe à proposta</b>: orçamento com imagem do ambiente fecha mais que orçamento com lista de itens.</span></div>
+      </div>
+    </div>
+    <div class="phone-wrap">
+      <div class="phone" id="phone">
+        <span class="phone-notch"></span>
+        <div class="phone-screen">
+          <div class="ph-head">
+            <span class="ph-ava"><img src="assets/icon-blue.png" alt=""></span>
+            <span>
+              <span class="ph-name">Ana Ribeiro · Cliente</span>
+              <span class="ph-status">online agora</span>
+            </span>
+          </div>
+          <div class="ph-chat" id="phChat">
+            <div class="bub in">Oi, Marcos! Aquele sofá azul que vi na loja… será que cabe na minha sala? 🤔<span class="b-time">14:02</span></div>
+            <div class="bub in">
+              <span class="b-img"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3ABnaz0TeLmqfEY2AkB4r4dev3h/hf_20260611_194657_8d243167-b030-4d99-8aad-8e2220435b21.png" alt="Foto da sala enviada pela cliente" loading="lazy"></span>
+              Essa é a sala. Tô na dúvida.<span class="b-time">14:03</span>
+            </div>
+            <div class="bub out">
+              <span class="b-img"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3ABnaz0TeLmqfEY2AkB4r4dev3h/hf_20260612_193345_b293dc9b-16e3-4d05-bf64-6e0bb189b7b0.png" alt="Simulação enviada pelo vendedor" loading="lazy"></span>
+              Ficou assim no seu ambiente 👇 mesma escala, mesma luz.
+              <span class="b-prod"><b>Sofá Class 3 lugares</b><span>R$ 2.490</span></span>
+              <span class="b-time">14:05 ✓✓</span>
+            </div>
+            <div class="bub in">Nossa, ficou perfeito!! Pode fechar 😍<span class="b-time">14:06</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OWNERS ============ -->
+<section class="owners section" id="para-lojas" data-theme="dark">
+  <div class="own-bg" aria-hidden="true"><img class="parbg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3ABnaz0TeLmqfEY2AkB4r4dev3h/hf_20260611_194725_9920c436-6aa1-4f21-9c65-cfa7c470edd1.png" alt="" loading="lazy"></div>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow" style="color:#5FA4E3">Para donos e gestores</span>
+      <h2>Uma loja inteira vendendo de forma visual.</h2>
+      <p>O Mobil.IA padroniza o melhor argumento de venda que existe, o "veja na sua casa", e coloca na mão de toda a equipe.</p>
+    </div>
+    <div class="own-grid">
+      <div class="own-card rv">
+        <span class="oi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></span>
+        <h4>Menos "vou pensar"</h4>
+        <p>A objeção número um do varejo de móveis é visual. Quando o cliente vê, a hesitação perde força.</p>
+      </div>
+      <div class="own-card rv">
+        <span class="oi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.4 3.4-5 6.5-5s5.7 1.6 6.5 5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18.5 15.5c1.7.7 2.7 2 3 4.5"/></svg></span>
+        <h4>Equipe pronta no primeiro dia</h4>
+        <p>Se o vendedor sabe usar WhatsApp, sabe usar o Mobil.IA. Sem treinamento técnico, sem designer.</p>
+      </div>
+      <div class="own-card rv">
+        <span class="oi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13l-3.5-3.5M20 16H7l3.5 3.5"/></svg></span>
+        <h4>Funciona com a casa já mobiliada</h4>
+        <p>Não precisa de espaço vazio: mostre a troca do móvel atual pelo novo, no ambiente real do cliente.</p>
+      </div>
+      <div class="own-card rv">
+        <span class="oi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 5.2 5.6.6-4.2 3.9 1.1 5.6L12 14.5l-4.9 2.8 1.1-5.6L4 7.8l5.6-.6z"/></svg></span>
+        <h4>Loja com imagem moderna</h4>
+        <p>Enquanto o concorrente manda foto de mostruário, sua equipe manda o móvel dentro da casa do cliente.</p>
+      </div>
+      <div class="own-card rv">
+        <span class="oi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+        <h4>Ciclo de venda mais curto</h4>
+        <p>A dúvida que levava dias de "vou medir em casa" se resolve dentro da própria conversa.</p>
+      </div>
+      <div class="own-card rv">
+        <span class="oi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.4 8.6 8.6 0 0 1-3.9-.9L3 20l1-5.4a8.3 8.3 0 0 1-1-4A8.4 8.4 0 0 1 11.5 2.3a8.4 8.4 0 0 1 9.5 9.2z"/></svg></span>
+        <h4>No fluxo que já existe</h4>
+        <p>Nada de mudar o jeito de vender. O Mobil.IA entra no WhatsApp e no atendimento que sua loja já faz.</p>
+      </div>
+    </div>
+    <div class="own-stat">
+      <div class="os rv"><b><em>1</em> foto</b><span>é tudo o que o cliente precisa enviar</span></div>
+      <div class="os rv"><b>segundos</b><span>entre a dúvida e a simulação pronta</span></div>
+      <div class="os rv"><b><em>100%</em> catálogo real</b><span>cada imagem vende um produto que existe na loja</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="final" id="piloto" data-theme="dark">
+  <div class="final-bg" aria-hidden="true"><img class="parbg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3ABnaz0TeLmqfEY2AkB4r4dev3h/hf_20260612_010807_324fc5f0-01f6-44f3-9974-708b8e9bdfd5.png" alt="" loading="lazy"></div>
+  <div class="wrap">
+    <img class="icon-mark rv" src="assets/icon-white.png" alt="">
+    <h2 class="rv">Transforme dúvida visual em decisão de compra.</h2>
+    <p class="rv">Estamos abrindo um grupo piloto com lojas de móveis, estúdios de decoração e varejistas premium. Vagas limitadas por região.</p>
+    <div class="final-ctas rv">
+      <a class="btn btn-primary" href="#" onclick="return false">Entrar em contato
+        <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="assets/logo-white.png" alt="Mobil.IA">
+        <p>A plataforma de IA que ajuda vendedores de móveis a mostrar antes de vender.</p>
+      </div>
+      <div class="foot-links">
+        <div class="foot-col">
+          <h5>Produto</h5>
+          <a href="#como-funciona">Como funciona</a>
+          <a href="#modos">Peça em Cena</a>
+          <a href="#modos">Monte o Ambiente</a>
+          <a href="#catalogo">Catálogo</a>
+        </div>
+        <div class="foot-col">
+          <h5>Para lojas</h5>
+          <a href="#para-lojas">Benefícios</a>
+          <a href="#piloto">Lista de pilotos</a>
+          <a href="#" onclick="return false">Fale com a gente</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Mobil.IA · Mostre antes de vender.</span>
+      <span>Feito para o varejo de móveis e decoração · Brasil</span>
+    </div>
+  </div>
+</footer>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
